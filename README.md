@@ -1,6 +1,6 @@
 # go-genetic-fuzzer
 
-> Autonomous vulnerability discovery engine using evolutionary algorithms — Go + Rust + C research framework.
+> Autonomous vulnerability discovery engine using evolutionary algorithms Go + Rust + C research framework.
 
 ![Go](https://img.shields.io/badge/Go-1.22-00ADD8?style=flat&logo=go)
 ![Rust](https://img.shields.io/badge/Rust-stable-orange?style=flat&logo=rust)
