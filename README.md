@@ -1,4 +1,4 @@
-# go-genetic-fuzzer
+# go genetic-fuzzer
 
 > Autonomous vulnerability discovery engine using evolutionary algorithms Go + Rust + C research framework.
 
@@ -12,7 +12,7 @@
 
 ## Research Overview
 
-This project is an academic research implementation of a **Genetic Fuzzing Engine** — a system that autonomously discovers software vulnerabilities using evolutionary algorithms.
+This project is an academic research implementation of a **Genetic Fuzzing Engine** a system that autonomously discovers software vulnerabilities using evolutionary algorithms.
 
 Unlike traditional fuzzers that send random data blindly, this engine **learns and evolves**. Each generation of payloads is smarter than the last, guided by execution time feedback and memory crash signals.
 
@@ -22,7 +22,7 @@ Unlike traditional fuzzers that send random data blindly, this engine **learns a
 
 ## How It Works
 
-### The Core Idea — Natural Selection for Bugs
+### The Core Idea Natural Selection for Bugs
 
 The engine treats input payloads like DNA. It applies the principles of natural selection to evolve payloads toward vulnerability triggers:
 
@@ -111,7 +111,7 @@ Rust Oracle ◄──── crash signal ───┘
 
 ## Phase 3 — Shared Memory IPC
 
-Go and Rust communicate through **memory-mapped files** (`mmap`) — zero latency, no network overhead, no disk I/O:
+Go and Rust communicate through **memory-mapped files** (`mmap`) zero latency, no network overhead, no disk I/O:
 
 ```
 ┌─────────────┐    mmap    ┌─────────────────┐
@@ -124,7 +124,7 @@ Go and Rust communicate through **memory-mapped files** (`mmap`) — zero latenc
 
 ## Phase 4 — The Evolution Loop
 
-The core genetic algorithm — survival of the fittest payloads:
+The core genetic algorithm survival of the fittest payloads:
 
 ```go
 // Crossover: combine DNA from two parent payloads
@@ -154,7 +154,7 @@ eliteCount := PopulationSize / 5
 
 ---
 
-## The Research Target — dummy_target.c
+## The Research Target dummy_target.c
 
 An intentionally vulnerable C program built specifically for this research. It contains a **Stack-based Buffer Overflow (CWE-121)** with a guided execution path that rewards the fuzzer with timing delays as it approaches the vulnerability:
 
@@ -178,7 +178,7 @@ void process_payload(const char *input) {
 }
 ```
 
-The fuzzer doesn't know about `ZRO` — it discovers the path purely through evolutionary pressure on execution timing.
+The fuzzer doesn't know about `ZRO` it discovers the path purely through evolutionary pressure on execution timing.
 
 ---
 
@@ -198,7 +198,7 @@ The fuzzer doesn't know about `ZRO` — it discovers the path purely through evo
 [+] Payload (Str): ZROAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 ```
 
-The engine evolved from random noise to the exact crash payload in **23 generations** — without any prior knowledge of the target's internal logic.
+The engine evolved from random noise to the exact crash payload in **23 generations** without any prior knowledge of the target's internal logic.
 
 ---
 
@@ -211,7 +211,7 @@ The engine evolved from random noise to the exact crash payload in **23 generati
 | Boofuzz | Python | Protocol-aware | External |
 | **This Engine** | **Go + Rust** | **Genetic + Time-feedback** | **Rust Memory Oracle** |
 
-The key differentiator is the **Rust Memory Oracle** — a dedicated real-time RAM monitor that operates independently of the target process, providing crash signals with zero overhead on the fuzzing loop.
+The key differentiator is the **Rust Memory Oracle** a dedicated real-time RAM monitor that operates independently of the target process, providing crash signals with zero overhead on the fuzzing loop.
 
 ---
 
@@ -243,21 +243,20 @@ cd memory_oracle && cargo build --release
 ## Academic References
 
 - Evolutionary Computation in Vulnerability Discovery
-- AFL: American Fuzzy Lop — Michał Zalewski
-- Genetic Algorithms in Software Testing — Fraser & Arcuri
+- AFL: American Fuzzy Lop Michał Zalewski
+- Genetic Algorithms in Software Testing Fraser & Arcuri
 - CWE-121: Stack-based Buffer Overflow
 
 ---
 
 ## About
 
-Built by **Adam El Outtassi** — Systems Engineer and Security Researcher from Morocco.
+Built by **Adam El Outtassi** Systems Engineer and Security Researcher from Morocco.
 
 Research conducted in isolated lab environments on intentionally vulnerable targets only.
 
 | Platform | Link |
 |----------|------|
-| GitHub | [adamsec-dev](https://github.com/adamsec-dev) |
 | HackerOne | [hackerone.com/adamsec-dev](https://hackerone.com/adamsec-dev) |
 | Twitter | [@AdamSecDev](https://x.com/AdamSecDev) |
 
