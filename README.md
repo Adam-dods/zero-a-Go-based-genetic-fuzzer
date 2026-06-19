@@ -257,7 +257,6 @@ Research conducted in isolated lab environments on intentionally vulnerable targ
 
 | Platform | Link |
 |----------|------|
-| HackerOne | [hackerone.com/adamsec-dev](https://hackerone.com/adamsec-dev) |
 | Twitter | [@AdamSecDev](https://x.com/AdamSecDev) |
 
 ---
