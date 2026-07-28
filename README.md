@@ -1,6 +1,6 @@
 # go genetic-fuzzer
 
-> Evolutionary fuzzing research framework using Go, Rust, and C.
+> Autonomous vulnerability discovery engine using evolutionary algorithms Go + Rust + C research framework.
 
 ![Go](https://img.shields.io/badge/Go-1.22-00ADD8?style=flat&logo=go)
 ![Rust](https://img.shields.io/badge/Rust-stable-orange?style=flat&logo=rust)
@@ -12,7 +12,7 @@
 
 ## Research Overview
 
-This project is an academic research implementation of a **Genetic Fuzzing Engine** that explores evolutionary algorithms for vulnerability discovery in controlled lab programs.
+This project is an academic research implementation of a **Genetic Fuzzing Engine** a system that autonomously discovers software vulnerabilities using evolutionary algorithms.
 
 Unlike traditional fuzzers that send random data blindly, this engine **learns and evolves**. Each generation of payloads is smarter than the last, guided by execution time feedback and memory crash signals.
 
@@ -29,7 +29,7 @@ The engine treats input payloads like DNA. It applies the principles of natural 
 ```
 Generation 0:  [random payloads] → evaluate → rank by fitness
 Generation 1:  [top performers breed] → mutate → evaluate → rank
-Generation N:  [evolved payloads] → TEST CRASH DETECTED → Result logged
+Generation N:  [evolved payloads] → CRASH DETECTED → Zero-Day Found
 ```
 
 ---
@@ -39,7 +39,7 @@ Generation N:  [evolved payloads] → TEST CRASH DETECTED → Result logged
 ```
 go-genetic-fuzzer/
 ├── targets/
-│   └── dummy_target.c        # Intentionally vulnerable C lab target
+│   └── dummy_target.c        # Intentionally vulnerable C program (the prey)
 ├── pkg/
 │   ├── engine/
 │   │   └── fuzzer.go         # Genetic algorithm core
@@ -105,13 +105,13 @@ Rust Oracle ◄──── crash signal ───┘
     └──► "Crash detected at Generation N — payload logged"
 ```
 
-**Why Rust?** Rust provides a compact systems component for crash signalling and memory-observation research alongside the Go engine.
+**Why Rust?** Zero-cost abstractions and direct memory access make it ideal for monitoring without adding overhead that would skew timing measurements.
 
 ---
 
 ## Phase 3 — Shared Memory IPC
 
-Go and Rust communicate through **memory-mapped files** (`mmap`) to minimize communication overhead during controlled lab experiments:
+Go and Rust communicate through **memory-mapped files** (`mmap`) zero latency, no network overhead, no disk I/O:
 
 ```
 ┌─────────────┐    mmap    ┌─────────────────┐
@@ -154,7 +154,7 @@ eliteCount := PopulationSize / 5
 
 ---
 
-## The Intentionally Vulnerable Research Target
+## The Research Target dummy_target.c
 
 An intentionally vulnerable C program built specifically for this research. It contains a **Stack-based Buffer Overflow (CWE-121)** with a guided execution path that rewards the fuzzer with timing delays as it approaches the vulnerability:
 
@@ -193,11 +193,12 @@ The fuzzer doesn't know about `ZRO` it discovers the path purely through evoluti
 [~] Gen 015 | Max Fitness: 5021847 ns | Best Genes: ZR9#pQ9...
 [~] Gen 023 | Max Fitness: 15089234 ns | Best Genes: ZRO#pQ9...
 
-[✓] TEST CRASH DETECTED AT GENERATION 23!
-[+] Crash-triggering input recorded for analysis.
+[🚨] TEST CRASH DISCOVERED AT GENERATION 23!
+[+] Payload (Hex): 5a524f41414141414141414141414141...
+[+] Payload (Str): ZROAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 ```
 
-The engine evolved from random input toward a crash-triggering test case in **23 generations**, without being given the target's internal decision path.
+The engine evolved from random noise to the exact crash payload in **23 generations** without any prior knowledge of the target's internal logic.
 
 ---
 
@@ -210,15 +211,16 @@ The engine evolved from random input toward a crash-triggering test case in **23
 | Boofuzz | Python | Protocol-aware | External |
 | **This Engine** | **Go + Rust** | **Genetic + Time-feedback** | **Rust Memory Oracle** |
 
-The differentiator is the **Rust Memory Oracle**: a dedicated research component that observes crash signals independently of the target process and feeds the result back to the fuzzing loop.
+The key differentiator is the **Rust Memory Oracle** a dedicated real-time RAM monitor that operates independently of the target process, providing crash signals with zero overhead on the fuzzing loop.
 
 ---
 
 ## Research Applications
 
-- Memory-safety testing in intentionally vulnerable C/C++ lab programs
-- Format-string and integer-overflow research in controlled targets
-- Protocol-parser robustness research in controlled targets
+- Buffer overflow discovery in C/C++ programs
+- Format string vulnerability detection
+- Integer overflow edge case identification
+- Protocol parser vulnerability research
 - Academic study of evolutionary algorithms in security
 
 ---
@@ -249,7 +251,7 @@ cd memory_oracle && cargo build --release
 
 ## About
 
-Built by **Adam El Outtassi** — Cybersecurity Researcher and Systems Developer from Morocco.
+Built by **Adam El Outtassi** Systems Engineer and Security Researcher from Morocco.
 
 Research conducted in isolated lab environments on intentionally vulnerable targets only.
 
@@ -260,3 +262,4 @@ Research conducted in isolated lab environments on intentionally vulnerable targ
 ---
 
 > *Evolution finds what brute force cannot.*
+EOF
