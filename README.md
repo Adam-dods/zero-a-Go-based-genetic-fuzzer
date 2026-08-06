@@ -251,13 +251,9 @@ cd memory_oracle && cargo build --release
 
 ## About
 
-Built by **Adam El Outtassi** Systems Engineer and Security Researcher from Morocco.
+Built by **Adam El Outtassi** Security Researcher from Morocco.
 
 Research conducted in isolated lab environments on intentionally vulnerable targets only.
-
-| Platform | Link |
-|----------|------|
-| Twitter | [@AdamSecDev](https://x.com/AdamSecDev) |
 
 ---
 
