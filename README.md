@@ -1,4 +1,4 @@
-# go genetic-fuzzer
+#  ZERO, a Go-based genetic fuzzer.
 
 > Autonomous vulnerability discovery engine using evolutionary algorithms Go + Rust + C research framework.
 
